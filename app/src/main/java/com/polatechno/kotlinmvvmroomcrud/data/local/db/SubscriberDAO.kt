@@ -1,7 +1,8 @@
-package com.polatechno.kotlinmvvmroomcrud.db
+package com.polatechno.kotlinmvvmroomcrud.data.local.db
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
+import com.polatechno.kotlinmvvmroomcrud.data.model.Subscriber
 
 @Dao
 interface SubscriberDAO {

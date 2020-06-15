@@ -1,4 +1,4 @@
-package com.polatechno.kotlinmvvmroomcrud
+package com.polatechno.kotlinmvvmroomcrud.ui.main
 
 import android.util.Patterns
 import androidx.databinding.Bindable
@@ -7,7 +7,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.polatechno.kotlinmvvmroomcrud.db.Subscriber
+import com.polatechno.kotlinmvvmroomcrud.data.SubscriberRepository
+import com.polatechno.kotlinmvvmroomcrud.data.model.Subscriber
+import com.polatechno.kotlinmvvmroomcrud.utils.Event
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
@@ -43,11 +45,14 @@ class SubscriberViewModel(private val repository: SubscriberRepository) : ViewMo
     fun saveOrUpdate() {
 
         if (inputName.value == null) {
-            statusMessage.value = Event("Please enter subscriber's name")
+            statusMessage.value =
+                Event("Please enter subscriber's name")
         } else if (inputEmail.value == null) {
-            statusMessage.value = Event("Please enter subscriber's email")
+            statusMessage.value =
+                Event("Please enter subscriber's email")
         } else if (!Patterns.EMAIL_ADDRESS.matcher(inputEmail.value!!).matches()) {
-            statusMessage.value = Event("Please enter a valid email address")
+            statusMessage.value =
+                Event("Please enter a valid email address")
         } else {
 
             if (isUpdateOrDelete) {
@@ -60,7 +65,13 @@ class SubscriberViewModel(private val repository: SubscriberRepository) : ViewMo
 
                 val name: String = inputName.value!!
                 val email: String = inputEmail.value!!
-                insert(Subscriber(0, name, email))
+                insert(
+                    Subscriber(
+                        0,
+                        name,
+                        email
+                    )
+                )
                 inputName.value = null
                 inputEmail.value = null
             }
@@ -85,9 +96,11 @@ class SubscriberViewModel(private val repository: SubscriberRepository) : ViewMo
         val newRowId: Long = repository.insert(subscriber)
 
         if (newRowId > -1) {
-            statusMessage.value = Event("Subscriber Inserted Successfully $newRowId")
+            statusMessage.value =
+                Event("Subscriber Inserted Successfully $newRowId")
         } else {
-            statusMessage.value = Event("Error Cccurred!")
+            statusMessage.value =
+                Event("Error Cccurred!")
         }
 
 
@@ -102,9 +115,11 @@ class SubscriberViewModel(private val repository: SubscriberRepository) : ViewMo
             isUpdateOrDelete = false
             saveOrUpdateButtonText.value = "Save"
             clearAllOrDeleteButtonText.value = "Clear All"
-            statusMessage.value = Event("$noOfRows Row Updated Successfully")
+            statusMessage.value =
+                Event("$noOfRows Row Updated Successfully")
         } else {
-            statusMessage.value = Event("Error Occurred...")
+            statusMessage.value =
+                Event("Error Occurred...")
         }
     }
 
@@ -120,10 +135,12 @@ class SubscriberViewModel(private val repository: SubscriberRepository) : ViewMo
             isUpdateOrDelete = false
             saveOrUpdateButtonText.value = "Save"
             clearAllOrDeleteButtonText.value = "Clear All"
-            statusMessage.value = Event("$noOfRowsDeleted Row Deleted Successfully")
+            statusMessage.value =
+                Event("$noOfRowsDeleted Row Deleted Successfully")
 
         } else {
-            statusMessage.value = Event("Error Occurred")
+            statusMessage.value =
+                Event("Error Occurred")
 
         }
 
@@ -135,9 +152,11 @@ class SubscriberViewModel(private val repository: SubscriberRepository) : ViewMo
         val noOFRowsDeleted = repository.deleteAll()
 
         if (noOFRowsDeleted > 0) {
-            statusMessage.value = Event("$noOFRowsDeleted Subscribers deleted Successfully")
+            statusMessage.value =
+                Event("$noOFRowsDeleted Subscribers deleted Successfully")
         } else {
-            statusMessage.value = Event("Error Occurred")
+            statusMessage.value =
+                Event("Error Occurred")
         }
 
 

@@ -1,9 +1,10 @@
-package com.polatechno.kotlinmvvmroomcrud.db
+package com.polatechno.kotlinmvvmroomcrud.data.local.db
 
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import com.polatechno.kotlinmvvmroomcrud.data.model.Subscriber
 
 @Database(entities = [Subscriber::class], version = 1)
 abstract class SubcriberDatabase : RoomDatabase() {

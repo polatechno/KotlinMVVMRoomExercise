@@ -1,18 +1,18 @@
-package com.polatechno.kotlinmvvmroomcrud
+package com.polatechno.kotlinmvvmroomcrud.ui.main
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.text.TextPaint
 import android.util.Log
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.polatechno.kotlinmvvmroomcrud.*
+import com.polatechno.kotlinmvvmroomcrud.data.SubscriberRepository
 import com.polatechno.kotlinmvvmroomcrud.databinding.ActivityMainBinding
-import com.polatechno.kotlinmvvmroomcrud.db.SubcriberDatabase
-import com.polatechno.kotlinmvvmroomcrud.db.Subscriber
-import com.polatechno.kotlinmvvmroomcrud.db.SubscriberDAO
+import com.polatechno.kotlinmvvmroomcrud.data.local.db.SubcriberDatabase
+import com.polatechno.kotlinmvvmroomcrud.data.model.Subscriber
 
 class MainActivity : AppCompatActivity() {
 
@@ -24,12 +24,18 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
+        binding = DataBindingUtil.setContentView(this,
+            R.layout.activity_main
+        )
 
         val dao = SubcriberDatabase.getInstantce(application).subscriberDAO
-        val repository = SubscriberRepository(dao)
+        val repository =
+            SubscriberRepository(dao)
 
-        val factory = SubscriberViewModelFactory(repository)
+        val factory =
+            SubscriberViewModelFactory(
+                repository
+            )
 
         subscriberViewModel = ViewModelProvider(this, factory).get(SubscriberViewModel::class.java)
         binding.myViewModel = subscriberViewModel
@@ -51,7 +57,10 @@ class MainActivity : AppCompatActivity() {
 
         binding.subscriberRecyclerview.layoutManager = LinearLayoutManager(this)
 
-        adapter = MyRecyclerViewAdapter({selectedItem : Subscriber-> listItemClicked(selectedItem)})
+        adapter =
+            MyRecyclerViewAdapter({ selectedItem: Subscriber ->
+                listItemClicked(selectedItem)
+            })
 
         binding.subscriberRecyclerview.adapter =adapter
         displaySubscribersList()

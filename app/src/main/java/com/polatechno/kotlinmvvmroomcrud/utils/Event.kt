@@ -1,4 +1,4 @@
-package com.polatechno.kotlinmvvmroomcrud
+package com.polatechno.kotlinmvvmroomcrud.utils
 
 open class Event<out T>(private val content: T) {
 

@@ -1,4 +1,4 @@
-package com.polatechno.kotlinmvvmroomcrud.db
+package com.polatechno.kotlinmvvmroomcrud.data.model
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity

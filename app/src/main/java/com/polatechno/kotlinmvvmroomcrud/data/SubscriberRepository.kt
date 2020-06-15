@@ -1,8 +1,7 @@
-package com.polatechno.kotlinmvvmroomcrud
+package com.polatechno.kotlinmvvmroomcrud.data
 
-import android.support.v4.app.INotificationSideChannel
-import com.polatechno.kotlinmvvmroomcrud.db.Subscriber
-import com.polatechno.kotlinmvvmroomcrud.db.SubscriberDAO
+import com.polatechno.kotlinmvvmroomcrud.data.model.Subscriber
+import com.polatechno.kotlinmvvmroomcrud.data.local.db.SubscriberDAO
 
 class SubscriberRepository(private val dao: SubscriberDAO) {
 
